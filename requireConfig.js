@@ -4,8 +4,8 @@ require.config({
         'knockout': '//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min',
         'pager': '//cdn.jsdelivr.net/pager.js/1.0.1/pager.min',
         'papaparse': '../vendor/papaparse',
-        'leaflet': '../bower_components/leaflet/dist/leaflet',
-        'leaflet.label': '../bower_components/Leaflet.label/dist/leaflet.label',
+        'leaflet': '/bower_components/leaflet/dist/leaflet',
+        'leaflet.label': '/bower_components/Leaflet.label/dist/leaflet.label',
         'fuzzy': 'http://kiro.me/javascript/projects/fuse.min',
 
         'jquery': '//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min',
