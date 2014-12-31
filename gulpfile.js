@@ -149,7 +149,7 @@ gulp.task(
 
 gulp.task(
     'build',
-    ['jshint', 'html', 'images', 'fonts', 'extras', 'copy_bower_components'], // NOTE: add jscs task
+    ['jshint', 'html', 'images', 'extras', 'copy_bower_components'], // NOTE: add fonts and jscs task
     function() {
         return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
     }
