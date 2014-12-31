@@ -69,7 +69,7 @@
                             </a>
                         </li>
                         <!-- ko foreach: getPaginationChunks -->
-                            <li>
+                            <li data-bind="css: { active: $root.paginationId() === $data }">
                                 <a href="#" data-bind="text: $data, click: function() { $root.setPaginationId($data); }"></a>
                             </li>
                         <!-- /ko -->
