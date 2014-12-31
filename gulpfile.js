@@ -156,6 +156,14 @@ gulp.task(
 );
 
 gulp.task(
+    'deploy',
+    function () {
+        return gulp.src('./dist/**/*')
+            .pipe($.ghPages());
+    }
+);
+
+gulp.task(
     'default', ['clean'],
     function() {
         gulp.start('build');
