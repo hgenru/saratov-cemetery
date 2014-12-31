@@ -2,12 +2,12 @@
 
 define(
     [
-        'knockout',
+        'knockout', 'pager',
 
         'models/AppModel'
     ],
     function(
-        ko,
+        ko, pager,
 
         AppModel
     ) {
@@ -100,7 +100,7 @@ define(
                 return result.slice(currentPoint, endPoint);
             }, this);
 
-            self.isCurrentPage = function(pageid){
+            self.isCurrentPage = function(pageid) {
                 var page = pager.page.find(pageid);
                 return page.isVisible;
             };

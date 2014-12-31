@@ -3,6 +3,10 @@
     v4.0.7
     https://github.com/mholt/PapaParse
 */
+
+// Там дальше кодовый ад, лучше этого не видеть
+// jshint ignore: start
+
 'use strict';
 
 define(

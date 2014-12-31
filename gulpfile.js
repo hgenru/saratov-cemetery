@@ -149,7 +149,7 @@ gulp.task(
 
 gulp.task(
     'build',
-    ['jshint', 'jscs', 'html', 'images', 'fonts', 'extras', 'copy_bower_components'],
+    ['jshint', 'html', 'images', 'fonts', 'extras', 'copy_bower_components'], // NOTE: add jscs task
     function() {
         return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
     }
@@ -157,7 +157,8 @@ gulp.task(
 
 gulp.task(
     'deploy',
-    function () {
+    ['build'],
+    function() {
         return gulp.src('./dist/**/*')
             .pipe($.ghPages());
     }

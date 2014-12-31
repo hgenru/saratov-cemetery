@@ -25,12 +25,12 @@ define(
                     type: 'GET',
                     url: 'sources/celemetry-section.json',
                     dataType: 'json',
-                    success: function (response) {
+                    success: function(response) {
                         L.geoJson(
                             response,
                             {
                                 onEachFeature: function(feature, layer) {
-                                    layer.on('click', function () {
+                                    layer.on('click', function() {
                                         pager.navigate('#!/section/' + feature.properties.section);
                                         layer.bindPopup(feature.properties.section);
                                     });
@@ -69,4 +69,5 @@ define(
         }
 
         return MapViewModel;
-});
+    }
+);

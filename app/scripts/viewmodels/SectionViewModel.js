@@ -37,4 +37,5 @@ define(
         }
 
         return SectionViewModel;
-});
+    }
+);
