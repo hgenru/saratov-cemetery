@@ -1,5 +1,5 @@
 require.config({
-    baseUrl: 'scripts',
+    baseUrl: './scripts',
     paths: {
         'knockout': '//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min',
         'pager': '//cdn.jsdelivr.net/pager.js/1.0.1/pager.min',

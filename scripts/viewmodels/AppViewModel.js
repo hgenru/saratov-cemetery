@@ -82,7 +82,7 @@ define(
                 if (!text) { return null; }
 
                 var fuses = this.app.fuses,
-                    currentSearchScope = this.app.currentSectionId();
+                    currentSearchScope = this.currentSearchScope();
 
                 var result = fuses[currentSearchScope].search(text);
                 return result;
