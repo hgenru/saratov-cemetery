@@ -36,7 +36,7 @@ define(
             }, this);
 
             self.calculateCurrentStageWhithPaginationId = function() {
-                self.currentStage(self.paginationId() * self.entryOnShowCount());
+                self.currentStage((self.paginationId() - 1) * self.entryOnShowCount());  // Pagination start on 1
             };
             self.setPaginationId = function(id) {
                 var chunksCount = self.paginationChunsCount();
@@ -63,10 +63,16 @@ define(
                                         paginationMaxChunks : paginationCountLength;
 
                 if (paginationId > middle) {
-                    chunkSliceStart = paginationId - middle;
                     chunkSliceEnd = paginationId + middle;
                     chunkSliceEnd = chunkSliceEnd <= paginationCountLength ?
                                         chunkSliceEnd : paginationCountLength;
+                    chunkSliceStart = paginationId - middle;
+                    var surpluses = paginationMaxChunks - (chunkSliceEnd - chunkSliceStart);
+                    // Перерасчет начала с учетом максимальной длины когда мы дошли до конца
+                    if (surpluses && (chunkSliceStart - surpluses)) {
+                        console.log(chunkSliceStart);
+                        chunkSliceStart -= surpluses;
+                    }
                 }
 
                 var result = [];
@@ -82,7 +88,7 @@ define(
                 if (!text) { return null; }
 
                 var fuses = this.app.fuses,
-                    currentSearchScope = this.app.currentSectionId();
+                    currentSearchScope = this.currentSearchScope();
 
                 var result = fuses[currentSearchScope].search(text);
                 return result;
