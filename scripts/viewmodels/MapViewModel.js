@@ -1,7 +1,7 @@
 'use strict';
 
 define(
-    ['jquery', 'leaflet', 'pager', 'leaflet.label'],
+    ['jquery', 'leaflet', 'pager'],
     function(jquery, L, pager) {
         function MapViewModel() {
             var self = this;
