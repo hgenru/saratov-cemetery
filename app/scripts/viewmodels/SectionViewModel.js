@@ -16,23 +16,27 @@ define(
 
             self.app = AppModel.instance();
 
-            self.chunks = ko.pureComputed(function() {
-                var data = this.app.departedData[self.app.currentSectionId()],
-                    chunks = {};
-                if (data) {
-                    for (var i=0; i < data.length; i++) {
-                        var entry = data[i];
-                        if (entry.row in chunks) {
-                            chunks[entry.row].push(entry);
-                        } else {
-                            chunks[entry.row] = [entry];
-                        }
+            self.currentRow = ko.observable(1);
+            self.setCurrentRow = function(newRow) {
+                self.currentRow(parseInt(newRow));
+            };
+            self.currentRowData = ko.pureComputed(function() {
+                var currentSection = this.app.sectionObjects[self.app.currentSectionId()];
+                var rowsData = currentSection.rowsData;
+                return rowsData[this.currentRow()];
+            }, this);
+
+            self.rowsDataKeys = ko.pureComputed(function() {
+                var section = this.app.sectionObjects[self.app.currentSectionId()];
+                var rowsData = section.rowsData;
+                var keys = [];
+                for (var key in rowsData) {
+                    if (key === 'length' || !rowsData.hasOwnProperty(key)) {
+                        continue;
                     }
+                    keys.push(key);
                 }
-                var array = jquery.map(chunks, function(value) {
-                    return [value];
-                });
-                return array;
+                return keys;
             }, this);
         }
 
