@@ -31,7 +31,7 @@ define(
                             {
                                 onEachFeature: function(feature, layer) {
                                     layer.on('click', function() {
-                                        pager.navigate('#!/section/' + feature.properties.section);
+                                        pager.navigate('#!/sections/' + feature.properties.section);
                                         layer.bindPopup(feature.properties.section);
                                     });
                                 }
