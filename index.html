@@ -22,6 +22,7 @@
         <script src="scripts/main.js"></script>
 
         <div class="container">
+            <div>
             <!-- ko if: app.ready -->
                 <a href="#" class="col-lg-1 btn btn-default btn-lg glyphicon glyphicon-home" role="button"><span class="input-group-btn " id="search-box-input-marker"></span></a>
                 <div class="col-lg-11 input-group input-group-lg">
@@ -43,7 +44,7 @@
                         <div class="row row-with-border">
                             <div class="col-lg-9">
                                 <h3>
-                                    <a data-bind="page-href: '../departed/' + id"><span data-bind="text: name"></span></a>
+                                    <a data-bind="page-href: '/departed/' + id"><span data-bind="text: name"></span></a>
                                     <small>
                                         <span data-bind="text: birthDate || '??.??.????'"></span>&nbsp;—&nbsp;<span
                                                         data-bind="text: deadDate"></span>
@@ -82,15 +83,12 @@
                 </nav>
                 <!-- /ko -->
             <!-- /ko -->
-            <div data-bind="page: {id: 'departed', with: departedViewModel}">
-                <div data-bind="page: {id: '?', nameParam: currentDepartedId}">
-                    <!-- ko if: !app.ready -->
-                        <div class="col-lg-12">
-                            <h4>Пожалуйста, подождите</h4>
-                        </div>
-                    <!-- /ko -->
-                    <!-- ko if: app.ready -->
-                        <div data-bind="with: currentDeparted">
+            </div>
+
+            <div data-bind="page: {id: 'departed'}">
+                <!-- ko if: app.ready -->
+                <div data-bind="page: {id: '?', nameParam: departedViewModel.currentDepartedId}">
+                        <div data-bind="with: departedViewModel.currentDeparted">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="page-header">
@@ -129,43 +127,59 @@
                                 </div>
                             </div>
                         </div>
-                    <!-- /ko -->
                 </div>
+                <!-- /ko -->
             </div>
 
-            <div data-bind="page: {id: 'map', role: 'start', with: mapViewModel}">
+            <div data-bind="page: {id: 'map', role: 'start'}">
                 <div id="saratov-cemetery-map" data-bind="leaflet: {
-                    options: mapOptions,
-                    latitude: latitude,
-                    longitude: longitude,
-                    zoom: zoom,
-                    callback: callbackWithMapInit }">
+                    options: mapViewModel.mapOptions,
+                    latitude: mapViewModel.latitude,
+                    longitude: mapViewModel.longitude,
+                    zoom: mapViewModel.zoom,
+                    callback: mapViewModel.callbackWithMapInit }">
                 </div>
             </div>
 
+            <div data-bind="page: {id: 'sections'}">
             <!-- ko if: app.ready -->
-                <div data-bind="page: {id: 'section', with: sectionViewModel}">
-                    <div data-bind="page: {id: '?', nameParam: app.currentSectionId}">
+                <div data-bind="page: {id: '?', nameParam: sectionViewModel.app.currentSectionId}">
+                    <div class="row">
+                        <h1 class="col-lg-12">Секция №<span data-bind="text: sectionViewModel.app.currentSectionId"></span></h1>
+                    </div>
+                    <div data-bind="foreach: sectionViewModel.rowsDataKeys()">
                         <div class="row">
-                            <h1 class="col-lg-12">Секция №<span data-bind="text: app.currentSectionId"></span></h1>
-                        </div>
-                        <div data-bind="foreach: chunks">
-                            <div class="row">
-                                <h4 class="col-lg-3" data-bind="text: 'Ряд ' + ($data[0].row)"></h4>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <ul class="pagination">
-                                    <!-- ko foreach: $data -->
-                                        <li><a data-bind="text: col, page-href: '/departed/' + id"></a></li>
-                                    <!-- /ko -->
-                                    </ul>
-                                </div>
-                            </div>
+                            <h4 class="col-lg-3"><a data-bind="text: 'Ряд ' + $data, page-href: '/rows/' + $data"></a></h4>
                         </div>
                     </div>
                 </div>
             <!-- /ko -->
+            </div>
+
+            <div data-bind="page: {id: 'rows'}">
+            <!-- ko if: app.ready -->
+                <div data-bind="page: {id: '?', nameParam: sectionViewModel.setCurrentRow}">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h1>
+                                Секция: <a data-bind="
+                                    text: sectionViewModel.app.currentSectionId,
+                                    page-href: '/sections/' + sectionViewModel.app.currentSectionId()"></a>,
+                                Ряд: <a data-bind="
+                                    text: sectionViewModel.currentRow,
+                                    page-href: '/rows/' + sectionViewModel.currentRow()"></a>
+                            </h1>
+                        </div>
+                    </div>
+                    <div data-bind="foreach: sectionViewModel.currentRowData()">
+                        <div class="row">
+                            <h4 class="col-lg-2">Ограда: <span data-bind="text: col"></span></h4>
+                            <h2 class="col-lg-10"><a data-bind="text: name, page-href: '/departed/' + id"></a></h2>
+                        </div>
+                    </div>
+                </div>
+            <!-- /ko -->
+            </div>
         </div>
     </head>
     <body>
