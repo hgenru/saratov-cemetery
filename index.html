@@ -149,7 +149,7 @@
                     </div>
                     <div data-bind="foreach: sectionViewModel.rowsDataKeys()">
                         <div class="row">
-                            <h4 class="col-lg-3"><a data-bind="text: 'Ряд ' + $data, page-href: '/rows/' + $data"></a></h4>
+                            <h4 class="col-lg-3"><a data-bind="text: 'Ряд ' + $data, page-href: '/rows/' + $data + '/' + $root.sectionViewModel.app.currentSectionId()"></a></h4>
                         </div>
                     </div>
                 </div>
@@ -177,6 +177,7 @@
                             <h2 class="col-lg-10"><a data-bind="text: name, page-href: '/departed/' + id"></a></h2>
                         </div>
                     </div>
+                    <div data-bind="page: {id: '?', nameParam: sectionViewModel.app.currentSectionId}"></div>
                 </div>
             <!-- /ko -->
             </div>
