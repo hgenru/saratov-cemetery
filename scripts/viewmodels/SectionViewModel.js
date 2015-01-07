@@ -26,6 +26,9 @@ define(
                 } else {
                     value = valueFloat;
                 }
+                if (!value) {
+                    value = newRow;
+                }
                 self.currentRow(value);
             };
 

@@ -162,7 +162,7 @@
                     <!-- Этот if нужен именно в этом месте, иначе в currentRow никогда ничего не запишется -->
                     <!-- ko if: (app.ready() && sectionViewModel.currentRow()) -->
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <h1>
                                 Секция: <a data-bind="
                                     text: sectionViewModel.app.currentSectionId,
@@ -174,7 +174,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -185,12 +185,12 @@
                                 <tbody data-bind="foreach: {data: Object.keys($root.sectionViewModel.currentRowData()), as: 'col'}">
                                     <tr>
                                         <td class="col-lg-1" data-bind="text: col"></td>
-                                        <td class="col-lg-6">
+                                        <td class="col-lg-11">
                                             <!-- ko foreach: $root.sectionViewModel.currentRowData()[col] -->
                                                 <div>
                                                     <a class="rows-departed-name" data-bind="
-                                                        text: name, page-href: '/departed/' + id"></a> [<span data-bind="text: birthDate || 'Неизвестно'"></span>&nbsp;—&nbsp;<span
-                                                                data-bind="text: deadDate || 'Неизвестно'"></span>]
+                                                        text: name, page-href: '/departed/' + id"><small></a> [<span data-bind="text: birthDate || 'Неизвестно'"></span>&nbsp;—&nbsp;<span
+                                                                data-bind="text: deadDate || 'Неизвестно'"></span>]</small>
                                                 </div>
                                             <!-- /ko -->
                                         </td>
