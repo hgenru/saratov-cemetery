@@ -47,7 +47,7 @@
                                     <a data-bind="page-href: '/departed/' + id"><span data-bind="text: name"></span></a>
                                     <small>
                                         <span data-bind="text: birthDate || '??.??.????'"></span>&nbsp;—&nbsp;<span
-                                                        data-bind="text: deadDate"></span>
+                                                        data-bind="text: deadDate || '??.??.????'"></span>
                                     </small>
                                 </h3>
                             </div>
@@ -86,49 +86,49 @@
             </div>
 
             <div data-bind="page: {id: 'departed'}">
-                <!-- ko if: app.ready -->
-                <div data-bind="page: {id: '?', nameParam: departedViewModel.currentDepartedId}">
-                        <div data-bind="with: departedViewModel.currentDeparted">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="page-header">
-                                        <h1 data-bind="text: name">
-                                        </h1>
-                                        <h1>
-                                            <small>
-                                                <span data-bind="text: birthDate || '??.??.????'"></span>&nbsp;—&nbsp;<span
-                                                data-bind="text: deadDate"></span>
-                                            </small>
-                                        </h1>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <img class="img-thumbnail" data-bind="attr: {'src': 'http://toldot.ru/images/cemetery/' + picture}">
-                                </div>
-                                <div class="col-lg-2">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>Секция:</td>
-                                                <td><a data-bind="text: section, page-href: '/sections/' + section"></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ряд:</td>
-                                                <td data-bind="text: row"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ограда:</td>
-                                                <td data-bind="text: col"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                <div data-bind="page: {id: '?', nameParam: departedViewModel.setCurrentDepartedId}">
+                    <!-- ko if: (app.ready() && departedViewModel.currentDepartedId()) -->
+                    <div data-bind="with: departedViewModel.currentDeparted">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="page-header">
+                                    <h1 data-bind="text: name">
+                                    </h1>
+                                    <h1>
+                                        <small>
+                                            <span data-bind="text: birthDate || '??.??.????'"></span>&nbsp;—&nbsp;<span
+                                            data-bind="text: deadDate"></span>
+                                        </small>
+                                    </h1>
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <img class="img-thumbnail" data-bind="attr: {'src': 'http://toldot.ru/images/cemetery/' + picture}">
+                            </div>
+                            <div class="col-lg-2">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Секция:</td>
+                                            <td><a data-bind="text: section, page-href: '/sections/' + section"></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ряд:</td>
+                                            <td><a data-bind="text: row, page-href: '/rows/' + row + '/' + section"></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ограда:</td>
+                                            <td data-bind="text: col"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
                 </div>
-                <!-- /ko -->
             </div>
 
             <div data-bind="page: {id: 'map', role: 'start'}">
@@ -143,22 +143,24 @@
 
             <div data-bind="page: {id: 'sections'}">
             <!-- ko if: app.ready -->
-                <div data-bind="page: {id: '?', nameParam: sectionViewModel.app.currentSectionId}">
+                <div data-bind="page: {id: '?', nameParam: sectionViewModel.setCurrentSectionIdAndClearCurrentRow}">
                     <div class="row">
-                        <h1 class="col-lg-12">Секция №<span data-bind="text: sectionViewModel.app.currentSectionId"></span></h1>
+                        <h1 class="col-lg-12">Секция <span data-bind="text: sectionViewModel.app.currentSectionId"></span></h1>
                     </div>
-                    <div data-bind="foreach: sectionViewModel.rowsDataKeys()">
-                        <div class="row">
-                            <h4 class="col-lg-3"><a data-bind="text: 'Ряд ' + $data, page-href: '/rows/' + $data + '/' + $root.sectionViewModel.app.currentSectionId()"></a></h4>
-                        </div>
-                    </div>
+                    <ul class="pagination pagination-lg" data-bind="foreach: sectionViewModel.rowsDataKeys()">
+                        <li><a data-bind="
+                            text: 'Ряд ' + $data,
+                            page-href: '/rows/' + $data + '/' + $root.sectionViewModel.app.currentSectionId()"></a>
+                        </li>
+                    </ul>
                 </div>
             <!-- /ko -->
             </div>
 
             <div data-bind="page: {id: 'rows'}">
-            <!-- ko if: app.ready -->
                 <div data-bind="page: {id: '?', nameParam: sectionViewModel.setCurrentRow}">
+                <!-- Этот if нужен именно в этом месте, иначе в currentRow никогда ничего не запишется -->
+                <!-- ko if: (app.ready() && sectionViewModel.currentRow()) -->
                     <div class="row">
                         <div class="col-lg-6">
                             <h1>
@@ -171,15 +173,33 @@
                             </h1>
                         </div>
                     </div>
-                    <div data-bind="foreach: sectionViewModel.currentRowData()">
-                        <div class="row">
-                            <h4 class="col-lg-2">Ограда: <span data-bind="text: col"></span></h4>
-                            <h2 class="col-lg-10"><a data-bind="text: name, page-href: '/departed/' + id"></a></h2>
-                        </div>
+                    <div class="row">
+                        <table class="table col-lg-6">
+                            <thead>
+                                <tr>
+                                    <td>Ограда</td>
+                                    <td>Имя</td>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: {data: Object.keys($root.sectionViewModel.currentRowData()), as: 'col'}">
+                                <tr>
+                                    <td class="col-lg-1" data-bind="text: col"></td>
+                                    <td class="col-lg-6">
+                                        <!-- ko foreach: $root.sectionViewModel.currentRowData()[col] -->
+                                            <div>
+                                                <a class="rows-departed-name" data-bind="
+                                                    text: name, page-href: '/departed/' + id"></a> [<span data-bind="text: birthDate || 'Неизвестно'"></span>&nbsp;—&nbsp;<span
+                                                            data-bind="text: deadDate || 'Неизвестно'"></span>]
+                                            </div>
+                                        <!-- /ko -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div data-bind="page: {id: '?', nameParam: sectionViewModel.app.currentSectionId}"></div>
+                    <div data-bind="page: {id: '?', nameParam: sectionViewModel.setCurrentSectionId}"></div>
+                <!-- /ko -->
                 </div>
-            <!-- /ko -->
             </div>
         </div>
     </head>

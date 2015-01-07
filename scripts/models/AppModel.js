@@ -16,7 +16,6 @@ define(
 
             self.ready = ko.observable(false);
 
-            // Сюда эта переманная вынесена для синхронизации скоупа поиска с вьюхами секций
             self.currentSectionId = ko.observable(1);
 
             self.departedData = {};
@@ -43,6 +42,7 @@ define(
                                 var entry = allData[dataI];
                                 var section = entry.section;
                                 var row = entry.row;
+                                var col = entry.col;
                                 // Тут возникает довольно жуткая избыточность данных,
                                 // Но если считать это всё динамически слабые компы умрут
                                 if (departedData[section]) {
@@ -52,13 +52,21 @@ define(
                                 }
                                 if (sectionObjects[section]) {
                                     if (sectionObjects[section].rowsData[row]) {
-                                        sectionObjects[section].rowsData[row].push(entry);
+                                        if (sectionObjects[section].rowsData[row][col]) {
+                                            sectionObjects[section].rowsData[row][col].push(entry);
+                                        } else {
+                                            sectionObjects[section].rowsData[row][col] = [entry];
+                                        }
                                     } else {
-                                        sectionObjects[section].rowsData[row] = [entry];
+                                        var colSon = {};
+                                        colSon[col] = [entry];
+                                        sectionObjects[section].rowsData[row] = colSon;
                                     }
                                 } else {
+                                    var cols = {};
                                     var elements = {};
-                                    elements[row] = [entry];
+                                    cols[col] = [entry];
+                                    elements[row] = cols;
                                     sectionObjects[section] = new SectionModel(elements);
                                 }
                             }

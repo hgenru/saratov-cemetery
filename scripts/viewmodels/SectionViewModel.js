@@ -16,10 +16,28 @@ define(
 
             self.app = AppModel.instance();
 
-            self.currentRow = ko.observable(1);
+            self.currentRow = ko.observable();
             self.setCurrentRow = function(newRow) {
-                self.currentRow(parseInt(newRow));
+                var valueFloat = parseFloat(newRow);
+                var valueInt = parseInt(newRow);
+                var value = null;
+                if (valueFloat === valueInt) {
+                    value = valueInt;
+                } else {
+                    value = valueFloat;
+                }
+                self.currentRow(value);
             };
+
+            self.setCurrentSectionId = function(newId) {
+                self.app.currentSectionId(parseInt(newId));
+            };
+
+            self.setCurrentSectionIdAndClearCurrentRow = function(newId) {
+                self.currentRow(undefined);
+                self.setCurrentSectionId(newId);
+            };
+
             self.currentRowData = ko.pureComputed(function() {
                 var currentSection = this.app.sectionObjects[self.app.currentSectionId()];
                 var rowsData = currentSection.rowsData;
@@ -29,13 +47,7 @@ define(
             self.rowsDataKeys = ko.pureComputed(function() {
                 var section = this.app.sectionObjects[self.app.currentSectionId()];
                 var rowsData = section.rowsData;
-                var keys = [];
-                for (var key in rowsData) {
-                    if (key === 'length' || !rowsData.hasOwnProperty(key)) {
-                        continue;
-                    }
-                    keys.push(key);
-                }
+                var keys = Object.keys(rowsData);
                 return keys;
             }, this);
         }

@@ -23,13 +23,16 @@ define(
             var self = this;
 
             self.app = AppModel.instance();
-            self.currentDepartedId = ko.observable(5);  // Random
+            self.currentDepartedId = ko.observable();
+            self.setCurrentDepartedId = function(newId) {
+                self.currentDepartedId(parseInt(newId));
+            };
             self.currentDeparted = ko.pureComputed(function() {
                 var data = this.app.departedData[0];
                 if (!data) {
                     return null;
                 }
-                var id = parseInt(this.currentDepartedId());
+                var id = this.currentDepartedId();
                 return findById(data, id);
             }, this);
         }
