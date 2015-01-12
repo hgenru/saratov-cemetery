@@ -44,3 +44,14 @@ img
 {
     margin-bottom: 5px;
 }
+
+#daparted-map
+{
+    height: 360px;
+    width: 100%;
+}
+
+.depart-map-wrapper
+{
+    width: 100%;
+}
