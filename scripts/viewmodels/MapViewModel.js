@@ -37,28 +37,28 @@ define(
                                 }
                             }
                         ).addTo(map);
-                        var myTextLabel = L.marker([51.5424617, 45.9884772], {
+                        var myTextLabel = L.marker([51.5428454, 45.9877101], {
                             icon: L.divIcon({
                                 className: 'map-section-label',
-                                html: '#1'
+                                html: '1'
                             }),
                             zIndexOffset: 1000
                         });
                         map.addLayer(myTextLabel);
 
-                        var myTextLabel2 = L.marker([51.5429188, 45.9884772], {
+                        var myTextLabel2 = L.marker([51.5432274, 45.9877369], {
                             icon: L.divIcon({
                                 className: 'map-section-label',
-                                html: '#2'
+                                html: '2'
                             }),
                             zIndexOffset: 1000
                         });
                         map.addLayer(myTextLabel2);
 
-                        var myTextLabel3 = L.marker([51.5436044, 45.9886086], {
+                        var myTextLabel3 = L.marker([51.5436645, 45.9877664], {
                             icon: L.divIcon({
                                 className: 'map-section-label',
-                                html: '#3'
+                                html: '3'
                             }),
                             zIndexOffset: 1000
                         });

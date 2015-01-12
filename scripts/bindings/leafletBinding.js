@@ -1,16 +1,13 @@
 'use strict';
 
 define(
-    ['knockout', 'leaflet'],
-    function(ko, L) {
+    ['knockout', 'jquery', 'leaflet'],
+    function(ko, jquery, L) {
         var leafletBinding = {
             init: function(element, valueAccessor){
                 var valueUnWrapped = ko.unwrap(valueAccessor()),
                     callback = valueUnWrapped.callback,
                     options = valueUnWrapped.options;
-
-                var realElementId = element.parentNode.id;  // TODO: REMOVE THIS, КОСТЫЛЬ: LEAFLET BUG
-                element.parentNode.id = 'important-display-block';
 
                 var map = L.map(element, options);
                 element.myMapProperty = map;
@@ -19,7 +16,6 @@ define(
                 }).addTo(map);
 
                 map.whenReady(function() {
-                    element.parentNode.id = realElementId;  // TODO: REMOVE THIS, КОСТЫЛЬ: LEAFLET BUG
                     if (callback) {
                         callback(this);
                     }
@@ -27,6 +23,10 @@ define(
 
                 ko.utils.domNodeDisposal.addDisposeCallback(
                   map, function() { element.myMapProperty.remove(); });
+
+                jquery(element).on('DOMAttrModified', function() {
+                    map.invalidateSize();
+                });
 
             },
 

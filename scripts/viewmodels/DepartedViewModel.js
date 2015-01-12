@@ -2,12 +2,12 @@
 
 define(
     [
-        'knockout', 'jquery',
+        'knockout', 'jquery', 'leaflet',
 
         'models/AppModel'
     ],
     function(
-        ko, jquery,
+        ko, jquery, L,
 
         AppModel
     ) {
@@ -21,6 +21,31 @@ define(
 
         function DepartedViewModel() {
             var self = this;
+
+            self.mapOptions = {
+                zoomControl: false,
+                dragging: false,
+                touchZoom: false,
+                doubleClickZoom: false,
+                scrollWheelZoom: false,
+                boxZoom: false,
+                keyboard: false
+            };
+
+            self.latitude = 51.5430289;
+            self.longitude = 45.9886676;
+            self.zoom = 17;
+
+            self.callbackWithMapInit = function(map) {
+                var icon = L.icon({
+                    iconUrl: '/bower_components/leaflet/dist/images/marker-icon-2x.png',
+                    iconSize: [30, 50]
+                });
+                var marker = new L.Marker([self.latitude, self.longitude], {icon: icon});
+                map.addLayer(marker);
+                self.marker = marker;
+                self.map = map;
+            };
 
             self.app = AppModel.instance();
             self.currentDepartedId = ko.observable();

@@ -107,6 +107,21 @@
                             <div class="col-lg-4">
                                 <img class="img-thumbnail" data-bind="attr: {'src': 'http://toldot.ru/images/cemetery/' + picture}">
                             </div>
+                            <div class="col-lg-4">
+                                <div class="img-thumbnail depart-map-wrapper">
+                                <div id="daparted-map" data-bind="leaflet: {
+                                    options: $root.departedViewModel.mapOptions,
+                                    latitude: $root.departedViewModel.latitude,
+                                    longitude: $root.departedViewModel.longitude,
+                                    zoom: $root.departedViewModel.zoom,
+                                    callback: function(map) {
+                                        $root.mapViewModel.callbackWithMapInit(map);  // Setup section
+                                        $root.departedViewModel.callbackWithMapInit(map);
+                                    }
+                                }">
+                                </div>
+                                </div>
+                            </div>
                             <div class="col-lg-2">
                                 <table class="table">
                                     <tbody>
