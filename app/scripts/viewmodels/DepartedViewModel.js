@@ -38,7 +38,7 @@ define(
 
             self.callbackWithMapInit = function(map) {
                 var icon = L.icon({
-                    iconUrl: '/bower_components/leaflet/dist/images/marker-icon-2x.png',
+                    iconUrl: '//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/images/marker-icon-2x.png',
                     iconSize: [30, 50]
                 });
                 var marker = new L.Marker([self.latitude, self.longitude], {icon: icon});
