@@ -37,7 +37,7 @@ define(
                                 }
                             }
                         ).addTo(map);
-                        var myTextLabel = L.marker([51.5428454, 45.9877101], {
+                        var myTextLabel = L.marker([51.542792, 45.9877342], {
                             icon: L.divIcon({
                                 className: 'map-section-label',
                                 html: '1'
