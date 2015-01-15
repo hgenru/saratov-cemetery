@@ -36,6 +36,8 @@ define(
             self.longitude = 45.9886676;
             self.zoom = 17;
 
+            self.map = null;
+
             self.callbackWithMapInit = function(map) {
                 var icon = L.icon({
                     iconUrl: '//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/images/marker-icon-2x.png',
@@ -45,6 +47,10 @@ define(
                 map.addLayer(marker);
                 self.marker = marker;
                 self.map = map;
+            };
+
+            self.mapInvalidateSize = function() {
+                self.map.invalidateSize();
             };
 
             self.app = AppModel.instance();
