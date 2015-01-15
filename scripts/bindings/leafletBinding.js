@@ -17,16 +17,13 @@ define(
 
                 map.whenReady(function() {
                     if (callback) {
-                        callback(this);
+                        map.invalidateSize();
+                        callback(map);
                     }
                 });
 
                 ko.utils.domNodeDisposal.addDisposeCallback(
                   map, function() { element.myMapProperty.remove(); });
-
-                jquery(element).on('DOMAttrModified', function() {
-                    map.invalidateSize();
-                });
 
             },
 

@@ -20,6 +20,8 @@ define(
             self.longitude = 45.9886676;
             self.zoom = 19;
 
+            self.map = null;
+
             self.callbackWithMapInit = function(map) {
                 jquery.ajax({
                     type: 'GET',
@@ -65,6 +67,11 @@ define(
                         map.addLayer(myTextLabel3);
                     }
                 });
+                self.map = map;
+            };
+
+            self.mapInvalidateSize = function() {
+                self.map.invalidateSize();
             };
         }
 
