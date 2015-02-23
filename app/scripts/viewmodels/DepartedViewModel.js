@@ -50,7 +50,9 @@ define(
             };
 
             self.mapInvalidateSize = function() {
-                self.map.invalidateSize();
+                if (self.map) {
+                    self.map.invalidateSize();
+                }
             };
 
             self.app = AppModel.instance();
