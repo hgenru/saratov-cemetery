@@ -28,7 +28,7 @@ define(
                     'sources/departed.csv',
                     {
                         header: true,
-                        fastMode: true,
+                        fastMode: false,
                         dynamicTyping: true,
                         worker: true,
                         download: true,
@@ -92,6 +92,7 @@ define(
                             }
                             self.fuses[0] = new Fuse(allData, fuseOptions);
 
+                            console.log('App is ready');
                             self.ready(true);
                         }
                     }

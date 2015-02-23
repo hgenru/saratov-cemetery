@@ -26,8 +26,10 @@
         <div class="container">
             <div>
             <!-- ko if: app.ready -->
-                <a href="#" class="col-lg-1 btn btn-default btn-lg glyphicon glyphicon-home" role="button"><span class="input-group-btn " id="search-box-input-marker"></span></a>
-                <div class="col-lg-11 input-group input-group-lg">
+                <div class="col-lg-12 input-group input-group-lg">
+                    <div class="input-group-btn">
+                        <a href="#" class="btn btn-default btn-lg glyphicon glyphicon-home" role="button"><span class="input-group-btn " id="search-box-input-marker"></span></a>
+                    </div>
                     <input data-bind="value: searchText, valueUpdate: 'afterkeydown'" type="text" class="form-control" placeholder="Начните вводить имя, год рождения или год сметри" aria-describedby="search-box-input-marker">
                     <div class="input-group-btn">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

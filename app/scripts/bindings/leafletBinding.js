@@ -4,7 +4,7 @@ define(
     ['knockout', 'jquery', 'leaflet'],
     function(ko, jquery, L) {
         var leafletBinding = {
-            init: function(element, valueAccessor){
+            init: function(element, valueAccessor) {
                 var valueUnWrapped = ko.unwrap(valueAccessor()),
                     callback = valueUnWrapped.callback,
                     options = valueUnWrapped.options;
@@ -17,7 +17,7 @@ define(
 
                 map.whenReady(function() {
                     if (callback) {
-                        map.invalidateSize();
+                        setTimeout(function() {map.invalidateSize();}, 1000);
                         callback(map);
                     }
                 });

@@ -70,7 +70,6 @@ define(
                     var surpluses = paginationMaxChunks - (chunkSliceEnd - chunkSliceStart);
                     // Перерасчет начала с учетом максимальной длины когда мы дошли до конца
                     if (surpluses && (chunkSliceStart - surpluses)) {
-                        console.log(chunkSliceStart);
                         chunkSliceStart -= surpluses;
                     }
                 }

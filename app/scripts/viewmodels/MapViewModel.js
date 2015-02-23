@@ -71,7 +71,21 @@ define(
             };
 
             self.mapInvalidateSize = function() {
-                self.map.invalidateSize();
+                // FIXME: Я хз что тут происходит
+                var mapElement = document.getElementById('saratov-cemetery-map');
+                if (!mapElement) { return; }
+                var map = mapElement.myMapProperty;
+                if (map) {
+                    setTimeout(function() {
+                        map.invalidateSize();
+                    }, 400);
+                    setTimeout(function() {
+                        map.invalidateSize();
+                    }, 1000);
+                    setTimeout(function() {
+                        map.invalidateSize();
+                    }, 3000);
+                }
             };
         }
 
