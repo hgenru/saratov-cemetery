@@ -79,7 +79,7 @@ define(
                     self.map.removeLayer(self.marker);
                 }
                 var icon = L.icon({
-                    iconUrl: '/images/grave.png',
+                    iconUrl: 'images/grave.png',
                     iconSize: [30, 30]
                 });
                 var marker = new L.Marker([departed.latitude, departed.longitude], {icon: icon});
