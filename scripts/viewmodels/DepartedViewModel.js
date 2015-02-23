@@ -39,18 +39,20 @@ define(
             self.map = null;
 
             self.callbackWithMapInit = function(map) {
-                var icon = L.icon({
-                    iconUrl: '//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/images/marker-icon-2x.png',
-                    iconSize: [30, 50]
-                });
-                var marker = new L.Marker([self.latitude, self.longitude], {icon: icon});
-                map.addLayer(marker);
-                self.marker = marker;
                 self.map = map;
+                window.departedMap = map;
             };
 
             self.mapInvalidateSize = function() {
-                self.map.invalidateSize();
+                if (self.map) {
+                    setTimeout(function() {
+                        self.map.invalidateSize();
+                        console.log('400');
+                    }, 400);
+                    setTimeout(function() {
+                        self.map.invalidateSize();
+                    }, 1000);
+                }
             };
 
             self.app = AppModel.instance();
@@ -59,13 +61,31 @@ define(
                 self.currentDepartedId(parseInt(newId));
             };
             self.currentDeparted = ko.pureComputed(function() {
+                this.app.ready();
                 var data = this.app.departedData[0];
                 if (!data) {
                     return null;
                 }
                 var id = this.currentDepartedId();
-                return findById(data, id);
+                var dp = findById(data, id);
+                return dp;
             }, this);
+            self.delayCurrentDeparted = ko.pureComputed(function() {return self.currentDeparted();}).extend({ throttle: 1000 });
+            self.delayCurrentDeparted.subscribe(function(departed) {
+                if (!departed) {
+                    return;
+                }
+                if (self.marker) {
+                    self.map.removeLayer(self.marker);
+                }
+                var icon = L.icon({
+                    iconUrl: '/images/grave.png',
+                    iconSize: [30, 30]
+                });
+                var marker = new L.Marker([departed.latitude, departed.longitude], {icon: icon});
+                self.marker = marker;
+                self.map.addLayer(marker);
+            });
         }
 
         return DepartedViewModel;
