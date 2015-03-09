@@ -7,8 +7,8 @@ define(
             var self = this;
 
             self.mapOptions = {
-                zoomControl: false,
-                dragging: false,
+                zoomControl: true,
+                dragging: true,
                 touchZoom: false,
                 doubleClickZoom: false,
                 scrollWheelZoom: false,
@@ -18,7 +18,7 @@ define(
 
             self.latitude = 51.5430289;
             self.longitude = 45.9886676;
-            self.zoom = 19;
+            self.zoom = 17;
 
             self.map = null;
 
@@ -39,32 +39,41 @@ define(
                                 }
                             }
                         ).addTo(map);
-                        var myTextLabel = L.marker([51.542792, 45.9877342], {
+                        var mapSectionLabel = L.marker([51.5428688, 45.9875947], {
                             icon: L.divIcon({
                                 className: 'map-section-label',
                                 html: '1'
                             }),
                             zIndexOffset: 1000
                         });
-                        map.addLayer(myTextLabel);
+                        map.addLayer(mapSectionLabel);
 
-                        var myTextLabel2 = L.marker([51.5432274, 45.9877369], {
+                        var mapSectionLabel2 = L.marker([51.5432791, 45.9876055], {
                             icon: L.divIcon({
                                 className: 'map-section-label',
                                 html: '2'
                             }),
                             zIndexOffset: 1000
                         });
-                        map.addLayer(myTextLabel2);
+                        map.addLayer(mapSectionLabel2);
 
-                        var myTextLabel3 = L.marker([51.5436645, 45.9877664], {
+                        var mapSectionLabel3 = L.marker([51.5440865, 45.9881687], {
                             icon: L.divIcon({
                                 className: 'map-section-label',
                                 html: '3'
                             }),
                             zIndexOffset: 1000
                         });
-                        map.addLayer(myTextLabel3);
+                        map.addLayer(mapSectionLabel3);
+
+                        var mapSectionLabel4 = L.marker([51.5442533, 45.9877181], {
+                            icon: L.divIcon({
+                                className: 'map-section-label',
+                                html: '4'
+                            }),
+                            zIndexOffset: 1000
+                        });
+                        map.addLayer(mapSectionLabel4);
                     }
                 });
                 self.map = map;

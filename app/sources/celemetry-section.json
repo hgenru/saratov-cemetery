@@ -3,7 +3,9 @@
   "features": [
     {
       "type": "Feature",
-      "properties": {"section": 1},
+      "properties": {
+        "section": 1
+      },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -58,7 +60,9 @@
     },
     {
       "type": "Feature",
-      "properties": {"section": 2},
+      "properties": {
+        "section": 2
+      },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -125,7 +129,9 @@
     },
     {
       "type": "Feature",
-      "properties": {"section": 3},
+      "properties": {
+        "section": 3
+      },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -177,6 +183,43 @@
             [
               45.989896059036255,
               51.54303225585487
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "section": 4
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              45.98803460597992,
+              51.54417324749521
+            ],
+            [
+              45.98772346973419,
+              51.54402645485269
+            ],
+            [
+              45.98759472370148,
+              51.54386965309783
+            ],
+            [
+              45.987406969070435,
+              51.54395639456091
+            ],
+            [
+              45.987659096717834,
+              51.544313367303104
+            ],
+            [
+              45.98803460597992,
+              51.54417324749521
             ]
           ]
         ]
