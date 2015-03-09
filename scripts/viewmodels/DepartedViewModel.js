@@ -23,8 +23,8 @@ define(
             var self = this;
 
             self.mapOptions = {
-                zoomControl: false,
-                dragging: false,
+                zoomControl: true,
+                dragging: true,
                 touchZoom: false,
                 doubleClickZoom: false,
                 scrollWheelZoom: false,
@@ -47,7 +47,6 @@ define(
                 if (self.map) {
                     setTimeout(function() {
                         self.map.invalidateSize();
-                        console.log('400');
                     }, 400);
                     setTimeout(function() {
                         self.map.invalidateSize();

@@ -25,9 +25,7 @@
             <div>
             <!-- ko if: app.ready -->
                 <div class="col-lg-12 input-group input-group-lg">
-                    <div class="input-group-btn">
-                        <a href="#" class="btn btn-default btn-lg glyphicon glyphicon-home" role="button"><span class="input-group-btn " id="search-box-input-marker"></span></a>
-                    </div>
+                    <a href="#" class="input-group-addon glyphicon glyphicon-home" role="button" style="top: 0 /* glyphicon fix */"><span class="input-group-btn " id="search-box-input-marker"></span></a>
                     <input data-bind="value: searchText, valueUpdate: 'afterkeydown'" type="text" class="form-control" placeholder="Начните вводить имя, год рождения или год сметри" aria-describedby="search-box-input-marker">
                     <div class="input-group-btn">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -44,7 +42,7 @@
                 <!-- ko if: searchText -->
                     <div class="col-lg-12" data-bind="foreach: getSlicedRelevantSearchResult">
                         <div class="row row-with-border">
-                            <div class="col-lg-9">
+                            <div class="col-lg-8">
                                 <h3>
                                     <a data-bind="page-href: '/departed/' + id"><span data-bind="text: name"></span></a>
                                     <small>
@@ -53,7 +51,7 @@
                                     </small>
                                 </h3>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <h3>
                                     <small>
                                         Секция: <span data-bind="text: section"></span>,
@@ -110,7 +108,6 @@
                                 <img class="img-thumbnail" data-bind="attr: {'src': 'http://toldot.ru/images/cemetery/' + picture}">
                             </div>
                             <div class="col-lg-4">
-                                <div class="img-thumbnail depart-map-wrapper">
                                 <div id="daparted-map" data-bind="leaflet: {
                                     options: $root.departedViewModel.mapOptions,
                                     latitude: $root.departedViewModel.latitude,
@@ -121,7 +118,6 @@
                                         $root.departedViewModel.callbackWithMapInit(map);
                                     }
                                 }">
-                                </div>
                                 </div>
                             </div>
                             <div class="col-lg-2">

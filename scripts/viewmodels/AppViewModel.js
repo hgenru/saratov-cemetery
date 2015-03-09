@@ -23,11 +23,12 @@ define(
                 'поиск везде',
                 'поиск только в первой секции',
                 'поиск только во второй секции',
-                'поиск только в третьей секции'
+                'поиск только в третьей секции',
+                'поиск только в четвёртой секции'
             ];
 
             self.entryOnShowCount = ko.observable(3);
-            self.paginationMaxChunks = ko.observable(20);
+            self.paginationMaxChunks = ko.observable(3);
             self.currentStage = ko.observable(1);
             self.paginationId = ko.observable(1);
             self.calculatePaginationId = ko.computed(function() {
@@ -86,8 +87,8 @@ define(
 
                 if (!text) { return null; }
 
-                var fuses = this.app.fuses,
-                    currentSearchScope = this.currentSearchScope();
+                var fuses = this.app.fuses;
+                var currentSearchScope = this.currentSearchScope();
 
                 var result = fuses[currentSearchScope].search(text);
                 return result;
