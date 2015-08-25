@@ -29,7 +29,7 @@ define(
 
             self.entryOnShowCount = ko.observable(3);
             self.paginationMaxChunks = ko.observable(3);
-            self.currentStage = ko.observable(1);
+            self.currentStage = ko.observable(0);
             self.paginationId = ko.observable(1);
             self.calculatePaginationId = ko.computed(function() {
                 this.paginationId(
