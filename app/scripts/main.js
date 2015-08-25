@@ -41,5 +41,6 @@ require(
         ko.applyBindings(appViewModel);
         pager.Href.hash = '#!/';
         pager.start();
+        window.m_site = appViewModel;
     }
 );
